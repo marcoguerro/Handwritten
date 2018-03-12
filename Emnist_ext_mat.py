@@ -107,13 +107,12 @@ print("Confusion matrix:\n%s" % metrics.confusion_matrix(expected, predicted))
 
 
 ## Utilizzando un campione omogeneo e ridotto
-bomber = train_labels[94000:] 
-SVC.fit(train_images[94000:], bomber) 
+SVC.fit(train_images[94000:], train_labels[94000:]) 
 expected = test_labels
 predicted = SVC.predict(test_images)
 print(metrics.accuracy_score(expected, predicted))
 
-## Plot a nice confsion matrix
+## Plot a nice confusion matrix
 import seaborn as sn
 
 labels = list(range(10))

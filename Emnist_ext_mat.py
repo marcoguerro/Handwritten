@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Feb 22 00:08:27 2018
-
 @author: marcoguerro
 
 @title: EMNIST - Support Vector Machine

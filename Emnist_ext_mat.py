@@ -2,7 +2,7 @@
 """
 Created on Thu Feb 22 00:08:27 2018
 
-@author: alessio
+@author: marcoguerro
 
 @title: EMNIST - Support Vector Machine
 """
@@ -17,9 +17,8 @@ import numpy as np
 import pandas as pd
 import time
 
-
 #file in matlab format
-data = scipy.io.loadmat('C:/Users/alessio/Desktop/gzip/matlab/emnist-balanced.mat')
+data = scipy.io.loadmat('emnist-balanced.mat')
 
 ############################  STUDIO DEL DATASET  #############################
 len(data['dataset']) # 1 ???
@@ -81,18 +80,13 @@ class prova():
     
     def labels(dat):
         return(dat[0][0][1].ravel())
-        
-#    def out(image, SVC = SVC):
-#        
-#        predicted = SVC.predict(prova_test_images[995].reshape(1, -1))
-#        return predicted
 
 train_images = prova.trans_image(train_set)
 train_labels = prova.labels(train_set)
 test_images = prova.trans_image(test_set)
 test_labels = prova.labels(test_set)
 
-SVC = svm.SVC(C=125,gamma=0.015) #the best: C=125 ,gamma=0.015
+SVC = svm.SVC(C=125,gamma=0.015)
 print('Inizio fit -> ',time.localtime().tm_hour,':',time.localtime().tm_min,':',time.localtime().tm_sec)
 SVC.fit(train_images, train_labels)
 print('Fine fit -> ',time.localtime().tm_hour,':',time.localtime().tm_min,':',time.localtime().tm_sec)
@@ -105,8 +99,7 @@ print("Classification report for classifier %s:\n%s\n"
       % (SVC, metrics.classification_report(expected, predicted)))
 print("Confusion matrix:\n%s" % metrics.confusion_matrix(expected, predicted))
 
-
-## Utilizzando un campione omogeneo e ridotto
+## Utilizzando un campione omogeneo e ridotto (validation)
 SVC.fit(train_images[94000:], train_labels[94000:]) 
 expected = test_labels
 predicted = SVC.predict(test_images)
@@ -123,5 +116,3 @@ cnf_matrix_pd = pd.DataFrame(cnf_matrix, index=labels, columns=labels)
 plt.figure(figsize = (20,14))
 sn.set(font_scale=1.4) #for label size
 sn.heatmap(cnf_matrix_pd, annot=True,annot_kws={"size": 5}, fmt='g')    # font size
-
-

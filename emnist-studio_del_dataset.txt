@@ -1,0 +1,33 @@
+############################  STUDIO DEL DATASET  #############################
+len(data['dataset']) # 1 ???
+len(data['dataset'][0]) # 1 ???
+len(data['dataset'][0][0]) # 3 !!n° datasets!!
+# data['dataset'][0][0][0] = dataset train 
+# data['dataset'][0][0][1] = dataset test
+# data['dataset'][0][0][2] = dataset mapping (47x2 double)
+len(data['dataset'][0][0][0]) # 1
+len(data['dataset'][0][0][0][0]) #n° datasets, dipende dal dataset iniziale
+len(data['dataset'][0][0][0][0][0]) # 3 !!n° subsets!!
+# data['dataset'][0][0][0][0][0][0] = subset images (nx784 unit8) where n depends on the input
+# data['dataset'][0][0][0][0][0][1] = subset labels (nx1 double) where n depends on the input
+# data['dataset'][0][0][0][0][0][2] = subset writes (nx1 double) where n depends on the input
+len(data['dataset'][0][0][0][0][0][0]) #n° immagini nel train_images
+len(data['dataset'][0][0][0][0][0][0][8]) #lunghezza di un immagine in forma vettoriale
+for i in ('none', 'nearest', 'bilinear', 'bicubic', 'spline16', 'spline36', 'hanning',
+          'hamming', 'hermite', 'kaiser', 'quadric', 'catrom', 'gaussian', 'bessel', 'mitchell', 'sinc', 'lanczos'):
+    # così andiamo a vedere le immagini dei vai tipi di kernel
+    a = data['dataset'][0][0][0][0][0][0][55]
+    some_digit_image = a.reshape(28, 28)
+    plt.imshow(np.transpose(some_digit_image), cmap = matplotlib.cm.binary,
+           interpolation=i)
+    plt.axis("off")
+    plt.show()
+    print(i,data['dataset'][0][0][0][0][0][1][55])
+    massimo = max(a)
+    some_digit_image_rescaled = a.reshape(28, 28)/massimo
+    plt.imshow(np.transpose(some_digit_image), cmap = matplotlib.cm.binary,
+           interpolation=i)
+    plt.axis("off")
+    plt.show()
+    print(i,data['dataset'][0][0][0][0][0][1][55])
+###############################################################################

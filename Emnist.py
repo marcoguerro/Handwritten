@@ -24,8 +24,7 @@ class prova():
     def esempio(dat):
         rand = random.sample(range(len(dat[0][0][0])),1)
         a = dat[0][0][0][rand]
-        massimo = max(a)
-        some_digit_image = a.reshape(28, 28)/massimo
+        some_digit_image = a.reshape(28, 28)/255 #[0,255]
         some_digit_image_transpose = some_digit_image.transpose()
         plt.imshow(some_digit_image_transpose, cmap = matplotlib.cm.binary,
            interpolation="nearest")
@@ -37,8 +36,7 @@ class prova():
         vect=[]
         for i in range(len(dat[0][0][0])):
             a = dat[0][0][0][i]
-            massimo = max(a)
-            some_digit_image = a.reshape(28, 28)/massimo
+            some_digit_image = a.reshape(28, 28)/255 #[0,255]
             some_digit_image_transpose = some_digit_image.transpose()
             vect.append(some_digit_image_transpose.ravel())
         return np.array(vect)
